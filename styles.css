@@ -1,0 +1,393 @@
+/* CSS Variables */
+:root {
+  --background-tab-color: #CCD;
+  --background-tab-text-color: #8AE;
+  --background-tab-hover-color: #DDE;
+  --background-tab-hover-text-color: #6AF;
+  --selected-tab-color: #EEF;
+  --selected-tab-text-color: #49F;
+  --selected-tab-hover-color: #EEF;
+  --selected-tab-hover-text-color: #37F;
+  --control-focus-color: #8CF;
+  --control-focus-text-color: #24F;
+  --control-focus-hover-color: #ACF;
+  --control-focus-hover-text-color: #46E;
+  --control-fade-color: inherit;
+  --control-fade-text-color: #8AD;
+  --control-fade-hover-color: #CDF;
+  --control-fade-hover-text-color: #68E;
+}
+
+/* Base */
+
+body, html {
+  width: 100%;
+  height: 100vh;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+#main-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 40px 1fr 30px;
+  grid-template-columns: 26em 1fr;
+}
+
+/* Header */
+
+header {
+  grid-row: 1;
+  grid-column: 1 / span 2;
+  background: gray;
+}
+
+/* Footer */
+
+footer {
+  grid-row: 3;
+  grid-column: 1 / span 2;
+  background: gray;
+}
+
+/* Main */
+
+main {
+  grid-row: 2;
+  grid-column: 2;
+  overflow: hidden;
+}
+
+/* Main - Canvas */
+
+#canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Left Menu */
+
+#left-menu {
+  grid-row: 2;
+  grid-column: 1;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Left Menu - Tabs */
+
+#tabs-bar {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.tab-header {
+  flex: 1;
+  margin: 20px 0 0 0;
+  font-size: 1.25em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 15px 5px 15px;
+  transition: 0.3s;
+  background: var(--background-tab-color);
+  color: var(--background-tab-text-color);
+  border-radius: 25px 25px 0px 0px;
+  font-weight: bold;
+  height: calc(1.25em + 10px);
+  overflow: hidden;
+}
+
+.tab-header:hover {
+  flex: 1.1;
+  background: var(--background-tab-hover-color);
+  color: var(--background-tab-hover-text-color);
+}
+
+.tab-header.active {
+  flex: 1.5;
+  color: var(--selected-tab-text-color);
+  background: var(--selected-tab-color);
+  font-weight: bolder;
+  margin-top:5px;
+  padding-top: 15px;
+  height: calc(1.25em + 25px);
+}
+
+.tab-header.active:hover {
+  flex: 1.5;
+  color: var(--selected-tab-hover-text-color);
+  background: var(--selected-tab-hover-color);
+}
+
+.tab-content {
+  margin: 0px;
+  display: none;
+  padding: 10px 0 0 0;
+  border-top: none;
+  animation: fadeEffect 0.25s;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+#tab-container {
+  display: block;
+  background: var(--selected-tab-color);
+  height: calc(100% - 1.25em - 30px);
+  overflow: auto;
+}
+
+/* Left Menu - Tabs - View */
+
+#view-tab-controls {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Controls */
+
+.control-holder {
+  display: block;
+  width: 80%;
+  padding: 2px;
+  margin: 5px 0;
+  font-size: 1.1em;
+}
+
+.control {
+  padding: 3px 3px 3px 50px;
+  margin: 6px 0px 0px -20px;
+  color: var(--control-focus-text-color);
+  background: var(--control-focus-color);
+  display: block;
+  height: 1.3em;
+  border-radius: 0 0.5em 0.5em 0;
+}
+
+/*
+.view-tab-controls-advanced {
+  padding: 3px 3px 3px 50px;
+  margin: 0px 0px 0px -20px;
+  color: var(--control-fade-text-color);
+  background: var(--control-fade-color);
+  display: block;
+  height: 1.3em;
+  border-radius: 0 0 0.5em 0;
+}
+*/
+
+.view-tab-controls-advanced {
+  display: none;
+  height: 1.3em;
+}
+
+#view-tab-controls.advanced .view-tab-controls-advanced {
+  display:block;
+}
+
+#view-tab-controls.advanced .view-tab-controls-advanced input[type="range"] {
+  width:10em;
+}
+
+/* Controls - Number */
+
+.control.entry .text {
+  display: inline-block;
+  width: 6em;
+}
+
+.control.entry input[type="number"] {
+  display: inline-block;
+  width: 5em;
+}
+
+/* Controls - Switch Slider */
+
+.switch input[type="checkbox"] {
+  display: none;
+}
+
+.control-holder .toggle {
+  cursor: pointer;
+  color: var(--control-fade-text-color);
+  background: var(--control-fade-color);
+}
+
+#view-tab-controls.advanced .toggle {
+  height: 2.6em;
+}
+
+.control-holder .toggle:hover {
+ color: var(--control-fade-hover-text-color);
+ background: var(--control-fade-hover-color);
+}
+
+.control-holder input[type="checkbox"]:checked + .toggle {
+ color: var(--control-focus-text-color);
+ background: var(--control-focus-color);
+}
+
+.control-holder input[type="checkbox"]:checked + .toggle:hover {
+ color: var(--control-focus-hover-text-color);
+ background: var(--control-focus-hover-color);
+}
+
+.control-holder .toggle:hover .slider-container {
+  background: var(--control-fade-hover-text-color);
+}
+
+.control-holder input[type="checkbox"]:checked + .toggle .slider-container {
+  background: var(--control-focus-text-color);
+}
+
+.control-holder input[type="checkbox"]:checked + .toggle:hover .slider-container {
+  background: var(--control-focus-hover-text-color);
+}
+
+/*
+.control-holder .toggle:hover + .view-tab-controls-advanced {
+ color: var(--control-fade-hover-text-color);
+ background: var(--control-fade-hover-color);
+}
+
+.control-holder input[type="checkbox"]:checked ~ .view-tab-controls-advanced {
+ color: var(--control-focus-text-color);
+ background: var(--control-focus-color);
+}
+
+.control-holder input[type="checkbox"]:checked + .toggle:hover + .view-tab-controls-advanced {
+ color: var(--control-focus-hover-text-color);
+ background: var(--control-focus-hover-color);
+}
+*/
+
+.slider-container {
+  position: relative;
+  top: 0.1em;
+  display: inline-block;
+  border-radius: 0.55em;
+  margin-right: 0.5em;
+  width: 2.5em;
+  height: 1.1em;
+  background: var(--control-fade-text-color);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider {
+  position: relative;
+  top: 0.1em;
+  left: 0.1em;
+  display: block;
+  border-radius: 50%;
+  content: "";
+  width: 0.9em;
+  height: 0.9em;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .toggle .slider {
+  -webkit-transform: translateX(1.4em);
+  -ms-transform: translateX(1.4em);
+  transform: translateX(1.4em);
+}
+
+/* Controls - Color Picker */
+
+
+.view-tab-controls-advanced .color-control {
+  vertical-align: top;
+  display: inline-block;
+  width: 5em;
+  height: 100%;
+}
+
+.view-tab-controls-advanced .color-control .text {
+  display: none;
+  position:relative;
+  top: -0.3em;
+  height:100%;
+  width: 5em;
+}
+
+.view-tab-controls-advanced .color-control input[type="color"] {
+  /*display: none;*/
+  display: inline-block;
+}
+
+.view-tab-controls-advanced .color-control input[type="color"] ~ .color-picker {
+  /*display: inline-block;*/
+  display: none;
+  height: 1.3em;
+  width: 1.3em;
+  border-radius: 0.25em;
+  border:1px solid black;
+}
+
+/* Warnings */
+
+span.warning-icon {
+  display: inline-block;
+  text-align: center;
+  margin-left: 5px;
+  width: 1.1em;
+  height: 1.1em;
+  background: yellow;
+  color: red;
+  border-radius: 50%;
+  border: 1px solid red;
+}
+
+.control-holder.warning-icon {
+  float: right;
+}
+
+
+/* Extra */
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.mouse-event-disabled {
+  pointer-events: none;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+.disabled {
+  display: none;
+}
+
+/* Animations */
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
